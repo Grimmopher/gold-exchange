@@ -56,10 +56,10 @@ class Exchanger {
     }
 
     exchange(orig) {
-        let origBase = this.convertToBase(orig);
-        let newBase = Math.round(origBase * this.rate);
-        if (newBase <= 0) newBase = 1;
-        return this.convertToCoins(newBase);
+        let origBaseValue = this.convertToBase(orig);
+        let newBaseValue = Math.round(origBaseValue * this.rate);
+        if (newBaseValue <= 0) newBaseValue = 1;
+        return this.convertToCoins(newBaseValue);
     };
 }
 
@@ -68,6 +68,13 @@ let exchanger = new Exchanger({
     newCoins: [
         {sign: 'g', value: 1000},
         {sign: 'e', value: 100},
+        {sign: 's', value: 10},
+        {sign: 'c', value: 1}
+    ],
+    oldCoins: [
+        {sign: 'p', value: 1000},
+        {sign: 'g', value: 100},
+        {sign: 'e', value: 50},
         {sign: 's', value: 10},
         {sign: 'c', value: 1}
     ]
