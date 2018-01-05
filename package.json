@@ -1,0 +1,23 @@
+{
+  "name": "gold-exchange",
+  "version": "0.1.0",
+  "description": "define new currencies to exchange with 5e currency",
+  "main": "goldexchange.js",
+  "scripts": {
+    "test": "mocha --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Grimmopher/gold-exchange.git"
+  },
+  "author": "Chris Grimm <grimmopher@gmail.com> (https://github.com/Grimmopher)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Grimmopher/gold-exchange/issues"
+  },
+  "homepage": "https://github.com/Grimmopher/gold-exchange#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^4.1.0"
+  }
+}

@@ -5,8 +5,8 @@ const input = process.argv.slice(2, process.argv.length).join(' ');
 // oldCoins and newCoins are arrays of objects contining
 // the sign and base value of each coin ex:
 // 1p = 1000c and 1g = 100c, ie: [ {sign: 'p', value: 1000}, {sign: 'g', value: 100} ]
-// Rate defaults to 10:1 to convert to a silver standard, and oldCoins and newCoins
-// default to 5e coin types, ie: p, g, e, s, c
+// Rate defaults to 10:1 to convert to a silver standard 
+// oldCoins and newCoins default to 5e coin types, ie: p, g, e, s, c
 class Exchanger {
     constructor({rate, oldCoins, newCoins} = {}) {
         this.convertToCopper = this.convertToBase.bind(this);
@@ -21,6 +21,7 @@ class Exchanger {
             {sign: 's', value: 10},
             {sign: 'c', value: 1}
         ]
+
         this.newCoins = newCoins == null ? defaultCoins : newCoins.sort( (a, b) => b.value - a.value );
         this.oldCoins = oldCoins == null ? defaultCoins : oldCoins.sort( (a, b) => b.value - a.value );
         if (rate == null) {
@@ -68,13 +69,6 @@ let exchanger = new Exchanger({
     newCoins: [
         {sign: 'g', value: 1000},
         {sign: 'e', value: 100},
-        {sign: 's', value: 10},
-        {sign: 'c', value: 1}
-    ],
-    oldCoins: [
-        {sign: 'p', value: 1000},
-        {sign: 'g', value: 100},
-        {sign: 'e', value: 50},
         {sign: 's', value: 10},
         {sign: 'c', value: 1}
     ]
