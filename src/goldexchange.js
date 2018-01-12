@@ -1,5 +1,3 @@
-const input = process.argv.slice(2, process.argv.length).join(' ');
-
 // Exchanges original 5e gold values to new standard
 // Rate should be a number or a string, ex '50:1' or 1/50
 // oldCoins and newCoins are arrays of objects contining
@@ -64,13 +62,4 @@ class Exchanger {
     };
 }
 
-let exchanger = new Exchanger({
-    rate: 1/50,
-    newCoins: [
-        {sign: 'g', value: 1000},
-        {sign: 'e', value: 100},
-        {sign: 's', value: 10},
-        {sign: 'c', value: 1}
-    ]
-});
-console.log(exchanger.exchange(input));
+export { Exchanger }

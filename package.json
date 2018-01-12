@@ -4,7 +4,8 @@
   "description": "define new currencies to exchange with 5e currency",
   "main": "goldexchange.js",
   "scripts": {
-    "test": "mocha --reporter spec"
+    "test": "mocha --reporter spec",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
