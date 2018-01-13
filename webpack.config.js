@@ -7,5 +7,14 @@ module.exports = {
     filename: 'gold-exchange.js',
     library: 'gold-exchange',
     libraryTarget: 'umd'
-  }
+  },
+  module: {
+    loaders: [
+        {
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader'
+        }
+    ]
+},
 };

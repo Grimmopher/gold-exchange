@@ -1,10 +1,15 @@
-var expect = require('chai').expect;
-var Exchanger = require('../dist/gold-exchange.js').Exchanger
+import { expect } from 'chai';
+import { Exchanger } from '../dist/gold-exchange.js';
 
-describe('gold-exchange', () => {
-    it('should pass', () => {
-        let exchanger = new Exchanger();
-        console.log(exchanger.exchange('10g'));
-        expect(true).to.be.true;
+describe('gold-exchange', function() {
+    let defaultExchanger;
+
+    before(function(){
+        defaultExchanger = new Exchanger();
+    })
+
+    it('should turn 10g to 1g', function() {
+        let newCoins = defaultExchanger.exchange('10g');
+        expect([{coin: 'a', amount: 100}]).to.deep.equal([{coin: 'a', amount: 100}]);
     })
 });

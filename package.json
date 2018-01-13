@@ -4,7 +4,7 @@
   "description": "define new currencies to exchange with 5e currency",
   "main": "goldexchange.js",
   "scripts": {
-    "test": "mocha --reporter spec",
+    "test": "mocha --reporter spec --require babel-register",
     "build": "webpack"
   },
   "repository": {
@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/Grimmopher/gold-exchange#readme",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
     "chai": "^4.1.2",
     "mocha": "^4.1.0",
     "webpack": "^3.10.0"
