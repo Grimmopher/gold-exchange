@@ -4,7 +4,8 @@
   "description": "define new currencies to exchange with 5e currency",
   "main": "goldexchange.js",
   "scripts": {
-    "test": "mocha --reporter spec --require babel-register",
+    "test": "nyc mocha --reporter spec --require babel-register",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "webpack"
   },
   "repository": {
@@ -23,7 +24,9 @@
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
+    "coveralls": "^3.0.0",
     "mocha": "^4.1.0",
+    "nyc": "^11.4.1",
     "webpack": "^3.10.0"
   }
 }
