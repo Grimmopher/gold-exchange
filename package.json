@@ -2,11 +2,15 @@
   "name": "gold-exchange",
   "version": "0.1.0",
   "description": "define new currencies to exchange with 5e currency",
-  "main": "gold-exchange.js",
+  "main": "dist/gold-exchange.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "nyc mocha --reporter spec --require babel-register",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "build": "webpack"
+    "build": "webpack",
+    "prepublish": "npm run test && npm run build"
   },
   "repository": {
     "type": "git",
@@ -27,6 +31,7 @@
     "coveralls": "^3.0.0",
     "mocha": "^4.1.0",
     "nyc": "^11.4.1",
+    "uglifyjs-webpack-plugin": "^1.1.6",
     "webpack": "^3.10.0"
   }
 }
