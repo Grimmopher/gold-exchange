@@ -2,7 +2,7 @@
   "name": "gold-exchange",
   "version": "0.1.0",
   "description": "define new currencies to exchange with 5e currency",
-  "main": "goldexchange.js",
+  "main": "gold-exchange.js",
   "scripts": {
     "test": "nyc mocha --reporter spec --require babel-register",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
