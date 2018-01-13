@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Exchanger } from '../dist/gold-exchange.js';
+import { Exchanger } from '../src/gold-exchange.js';
 
 describe('gold-exchange', function() {
     let defaultExchanger;
