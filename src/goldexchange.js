@@ -1,43 +1,35 @@
 // Exchanges original 5e gold values to new standard
-// Rate should be a number or a string, ex '50:1' or 1/50
-// oldCoins and newCoins are arrays of objects contining
-// the sign and base value of each coin ex:
-// 1p = 1000c and 1g = 100c, ie: [ {sign: 'p', value: 1000}, {sign: 'g', value: 100} ]
+// Rate should be a number, eg a 50:1 exchange rate should be 1/50
+// oldCurrency and newCurrency are arrays of objects contining
+// the symbol and base value of each coin ex:
+// 1p = 1000c and 1g = 100c, ie: [ {symbol: 'p', value: 1000}, {symbol: 'g', value: 100} ]
 // Rate defaults to 10:1 to convert to a silver standard 
-// oldCoins and newCoins default to 5e coin types, ie: p, g, e, s, c
+// oldCurrency and newCurrency default to 5e coin types, ie: p, g, e, s, c
 class Exchanger {
-    constructor({rate, oldCoins, newCoins} = {}) {
+    constructor({rate, oldCurrency, newCurrency} = {}) {
         this.convertToCopper = this.convertToBase.bind(this);
         this.convertToCoins = this.convertToCoins.bind(this);
         this.exchange = this.exchange.bind(this);
 
         let defaultRate = 1/10;
-        let defaultCoins = [
-            {sign: 'p', value: 1000},
-            {sign: 'g', value: 100},
-            {sign: 'e', value: 50},
-            {sign: 's', value: 10},
-            {sign: 'c', value: 1}
-        ]
+        let defaultCurrency = [
+            {symbol: 'p', value: 1000},
+            {symbol: 'g', value: 100},
+            {symbol: 'e', value: 50},
+            {symbol: 's', value: 10},
+            {symbol: 'c', value: 1}
+        ]       
 
-        this.newCoins = newCoins == null ? defaultCoins : newCoins.sort( (a, b) => b.value - a.value );
-        this.oldCoins = oldCoins == null ? defaultCoins : oldCoins.sort( (a, b) => b.value - a.value );
-        if (rate == null) {
-            this.rate = defaultRate;
-        } else if (isNaN(rate)){
-            let r = rate.split(':').map( v => parseInt(v) );
-            this.rate = r[1]/r[0];
-        } else {
-            this.rate = rate;
-        }
+        this.newCurrency = newCurrency === undefined ? defaultCurrency : newCurrency.sort( (a, b) => b.value - a.value );
+        this.oldCurrency = oldCurrency === undefined ? defaultCurrency : oldCurrency.sort( (a, b) => b.value - a.value );
+        this.rate = rate === undefined ? defaultRate : rate;
     };
 
-    convertToBase(value) {
-        let vals = value.toLowerCase().split(' ');
-        return vals.reduce( (total, val) => {
-            this.oldCoins.forEach( (coin) => {
-                if (val.includes(coin.sign)) {
-                    return total += parseInt(val) * coin.value;
+    convertToBase(oldCoins) {
+        return oldCoins.reduce( (total, oldCoin) => {
+            this.oldCurrency.forEach( (coin) => {
+                if (oldCoin.symbol === coin.symbol) {
+                    return total += oldCoin.quantity * coin.value;
                 }
             });
             return total;
@@ -45,20 +37,31 @@ class Exchanger {
     }
 
     convertToCoins(value) {
-        return this.newCoins.reduce( (convertedValue, coin) => {
+        let newValue = [];
+        this.newCurrency.forEach( (coin) => {
             if (value/coin.value >= 1) {
-                convertedValue += Math.floor(value/coin.value).toString() + `${coin.sign} `;
+                let quantity = Math.floor(value/coin.value);
+                newValue.push( { symbol: coin.symbol, quantity: quantity } );
                 value = value%coin.value;
             }
-            return convertedValue
-        }, '');
+        });
+        return newValue;
     }
 
+    // example orig:
+    // [
+    //     { symbol: 'p', quantity: 1 },
+    //     { symbol: 'g', quantity: 1 },
+    //     { symbol: 'e', quantity: 1 },
+    //     { symbol: 's', quantity: 1 },
+    //     { symbol: 'c', quantity: 1 }
+    // ]
     exchange(orig) {
         let origBaseValue = this.convertToBase(orig);
         let newBaseValue = Math.round(origBaseValue * this.rate);
         if (newBaseValue <= 0) newBaseValue = 1;
-        return this.convertToCoins(newBaseValue);
+        let newCoins = this.convertToCoins(newBaseValue);
+        return newCoins;
     };
 }
 
