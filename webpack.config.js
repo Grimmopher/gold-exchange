@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/goldexchange.js',
+  entry: './src/gold-exchange.js',
   devtool: 'inline-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
