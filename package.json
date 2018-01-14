@@ -7,9 +7,11 @@
     "dist"
   ],
   "scripts": {
+    "start": "webpack-dev-server --open --config webpack.server.js",
     "test": "nyc mocha --reporter spec --require babel-register",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "build": "webpack",
+    "build": "webpack --config webpack.lib.js",
+    "build-example": "webpack --config webpack.github.js",
     "prepublish": "npm run test && npm run build"
   },
   "repository": {
@@ -28,10 +30,14 @@
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
+    "clean-webpack-plugin": "^0.1.17",
     "coveralls": "^3.0.0",
+    "html-webpack-plugin": "^2.30.1",
     "mocha": "^4.1.0",
     "nyc": "^11.4.1",
     "uglifyjs-webpack-plugin": "^1.1.6",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.0",
+    "webpack-merge": "^4.1.1"
   }
 }
