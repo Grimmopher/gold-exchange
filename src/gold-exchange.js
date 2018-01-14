@@ -7,7 +7,7 @@
 // oldCurrency and newCurrency default to 5e coin types, ie: p, g, e, s, c
 class Exchanger {
     constructor({rate, oldCurrency, newCurrency} = {}) {
-        this.convertToCopper = this.convertToBase.bind(this);
+        this.convertToBase = this.convertToBase.bind(this);
         this.convertToCoins = this.convertToCoins.bind(this);
         this.exchange = this.exchange.bind(this);
 
